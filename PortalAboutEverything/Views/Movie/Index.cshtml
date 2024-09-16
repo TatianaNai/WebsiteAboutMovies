@@ -1,0 +1,103 @@
+﻿@model PortalAboutEverything.Models.Movie.IndexMovieAdminViewModel
+@using PortalAboutEverything.LocalizationResources
+
+@section Style {
+    <link rel="stylesheet" href="/css/Movie/movieStyle.css?=2" />
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="/js/Movies/movieShowAmountReviews.js"></script>
+    <script src="/js/Movies/index.js"></script>
+    <script src="/js/Movies/deleteMovie.js"></script>
+    <script src="/js/Movies/movieNotifications.js"></script>
+    <script src="/js/Movies/movieReview.js"></script>
+    
+}
+
+<div class="movieStatisticsTable">
+    <div class="movieColumnsName">
+        <div class="cell">@Movie_Index.MovieName</div>
+        <div class="cell">@Movie_Index.DirectorName</div>
+        <div class="cell">@Movie_Index.AmountUsers</div>
+        <div class="cell">@Movie_Index.AmountReviews</div>
+    </div>
+    @foreach (var movieInfo in Model.MovieStatistics)
+    {
+        <div class="movieContent">
+            <input class="movieId" type="hidden" value="@movieInfo.Id" />
+            <div class="cell name">@movieInfo.Name</div>
+            <div class="cell director">@movieInfo.Director</div>
+            <div class="cell countOfUsers">@movieInfo.CountOfUsersWhoFavorite</div>
+            <div class="cell countOfReviews"></div>
+        </div>
+        }
+</div>
+<div>
+    <h1>Notifications</h1>
+    <div class="notifications-containter">
+    </div>
+</div>
+<div>
+    @Movie_Index.ChooseAction
+</div>
+<div>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+            <a href="/Movie/GiveFeedback">@Movie_Index.LeaveReview</a>
+    }
+</div>
+<div>
+    @if (Model.IsMovieAdmin)
+    {
+            <a class="create-link" href="/Movie/CreateMovie">@Movie_Index.CreateMovie</a>
+    }
+</div>
+<div>
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+            <a class="moviesFan-link" href="/Movie/MoviesFan">@Movie_Index.MovieFanPage</a>
+    }
+</div>
+<div>
+    <a class="methods-link" href="/Movie/Methods">All methods</a>
+</div>
+<div>
+    @Movie_Index.ListOfMovies
+</div>
+<div class="movies">
+    @foreach (var movie in Model.Movies)
+    {
+        <div class="movie">
+            <input class="movieId" type="hidden" value="@movie.Id" />
+            <span class="movieName">@Movie_Index.Movie <a href="/Movie/UpdateMovie?id=@movie.Id">@movie.Name</a></span> 
+            @if (movie.HasCover)
+            {
+                <img class="movieImage" src="/images/Movie/cover-@(movie.Id).jpg" />
+            }
+            else
+            {
+                <img class="movieImage" src="/images/Movie/cover-default.jpg" />
+            }
+                <div>@Movie_Index.ReleaseYear @movie.ReleaseYear год</div>
+                <div>@Movie_Index.MovieDirector @movie.Director</div>
+                <div>@Movie_Index.CountryOfOrigin @movie.CountryOfOrigin</div>
+                <div>@Movie_Index.MovieBudget @movie.Budget</div>
+                <div>@Movie_Index.MovieDescription</div>
+                <div class="movieDescription">@movie.Description</div>
+                <div class="deleteMovie">
+                    @Movie_Index.Delete
+                    <input class="movieIdDel" type="hidden" value="@movie.Id" />
+                </div>
+                <form action="/Movie/AddMovieToMoviesFan" method="post">
+                    <input type="hidden" value="@movie.Id" name="movieId" />
+                    <input class="addToMoviesFan" type="submit" value="@Movie_Index.Add @movie.Name @Movie_Index.ToFavorites_LowerCase" />
+                </form>
+                <div>
+                    <a href="/Movie/MovieAddReview?id=@movie.Id">@Movie_Index.LeaveReviewForMovie "@movie.Name"</a>
+                </div>
+                <div class="review-container">
+                </div>
+            </div>
+    }
+</div>

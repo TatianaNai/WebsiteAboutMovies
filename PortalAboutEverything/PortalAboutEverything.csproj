@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PortalAboutEverything.Data\PortalAboutEverything.Data.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="LocalizationResources\Movie_CreateMovie.Ru.Designer.cs">
+			<DependentUpon>Movie_CreateMovie.Ru.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="LocalizationResources\Movie_CreateMovie.Designer.cs">
+			<DependentUpon>Movie_CreateMovie.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="LocalizationResources\Movie_Index.Ru.Designer.cs">
+			<DependentUpon>Movie_Index.Ru.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="LocalizationResources\Movie_Index.Designer.cs">
+			<DependentUpon>Movie_Index.resx</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="LocalizationResources\Movie_CreateMovie.Ru.resx">
+			<LastGenOutput>Movie_CreateMovie.Ru.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="LocalizationResources\Movie_CreateMovie.resx">
+			<LastGenOutput>Movie_CreateMovie.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="LocalizationResources\Movie_Index.Ru.resx">
+			<LastGenOutput>Movie_Index.Ru.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="LocalizationResources\Movie_Index.resx">
+			<LastGenOutput>Movie_Index.Designer.cs</LastGenOutput>
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Movie\" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.JSInterop" Version="8.0.7" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.6" />
+	</ItemGroup>
+
+</Project>

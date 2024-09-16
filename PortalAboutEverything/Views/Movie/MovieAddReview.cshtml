@@ -1,0 +1,37 @@
+﻿@model PortalAboutEverything.Models.Movie.MovieAddReviewViewModel
+
+@section Style {
+			<link rel="stylesheet" href="/css/Movie/movieStyle.css" />
+}
+
+@section Scripts {
+	<script src="/js/Movies/movieReviewAdd.js"></script>
+}
+
+<div>
+	Оцените фильм
+</div>
+<div>
+	<div>
+		<div class="movieId">
+			@Html.HiddenFor(x => x.MovieId)
+		</div>
+		<div>
+			@Html.TextBoxFor(x => x.Name, new { placeholder = "Название фильма" })
+		</div>
+		<div>
+			@foreach (var rate in Model.AvailableRate)
+			{
+				<label class="rate">Оценка @rate
+					<input type="radio" name="rate" value="@rate"/>
+				</label>
+			}
+		</div>
+		<div>
+			<textarea name="comment" class="comment"></textarea>
+		</div>
+		<div>
+			<button class="sendReview">Отправить отзыв</button>
+		</div>
+	</div>
+</div>

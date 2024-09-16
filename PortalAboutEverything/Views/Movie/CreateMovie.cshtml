@@ -1,0 +1,41 @@
+﻿@using PortalAboutEverything.LocalizationResources
+@using PortalAboutEverything.Models.Movie
+@model MovieCreateViewModel
+
+@section Style {
+			<link rel="stylesheet" href="/css/Movie/movieStyle.css" />
+}
+
+<form method="post" enctype="multipart/form-data">
+	<div>
+		@Html.TextBoxFor(x => x.Name, new { placeholder = Movie_CreateMovie.MovieTitle_LowerCase })
+		@Html.ValidationMessageFor(x => x.Name)
+	</div>
+	 <div>
+		@Html.TextAreaFor(x => x.Description, new { placeholder = Movie_CreateMovie.Description_LowerCase })
+		@Html.ValidationMessageFor(x => x.Description)
+	</div>
+	<div>
+		@Html.TextBoxFor(x => x.ReleaseYear, new { placeholder = Movie_CreateMovie.ReleaseYear_LowerCase })
+		@Html.ValidationMessageFor(x => x.ReleaseYear)
+	</div>
+	<div>
+		@Html.TextBoxFor(x => x.Director, new { placeholder = Movie_CreateMovie.Director_LowerCase })
+		@Html.ValidationMessageFor(x => x.Director)
+	</div>
+	<div>
+		@Html.TextBoxFor(x => x.Budget, new { placeholder = Movie_CreateMovie.Budget_LowerCase, type = "number", min = "0" })
+		@Html.ValidationMessageFor(x => x.Budget)
+	</div>
+	<div>
+		@Html.TextBoxFor(x => x.CountryOfOrigin, new { placeholder = Movie_CreateMovie.CountryOfOrigin_LowerCase })
+		@Html.ValidationMessageFor(x => x.CountryOfOrigin)
+	</div>
+	<div>
+		<input type="file" name="@nameof(MovieCreateViewModel.MovieImage)" accept="image/png, image/jpeg" />
+		@Html.ValidationMessageFor(x => x.MovieImage)
+	</div>
+	<div>
+		<input type="submit" value="@Movie_CreateMovie.Create_LowerCase"/>
+	</div>
+ </form>
