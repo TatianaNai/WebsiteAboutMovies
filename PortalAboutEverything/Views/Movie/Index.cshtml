@@ -42,12 +42,6 @@
     @Movie_Index.ChooseAction
 </div>
 <div>
-    @if (User.Identity?.IsAuthenticated ?? false)
-    {
-            <a href="/Movie/GiveFeedback">@Movie_Index.LeaveReview</a>
-    }
-</div>
-<div>
     @if (Model.IsMovieAdmin)
     {
             <a class="create-link" href="/Movie/CreateMovie">@Movie_Index.CreateMovie</a>

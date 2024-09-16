@@ -69,17 +69,6 @@ namespace PortalAboutEverything.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
-        public IActionResult GiveFeedback(MovieFeedbackViewModel movieFeedbackViewModel)
-        {
-            return View(movieFeedbackViewModel);
-        }
-
-        public IActionResult ShowFeedback(MovieShowFeedbackViewModel showFeedbackViewModel)
-        {
-            return View(showFeedbackViewModel);
-        }
-
         [HttpGet]
         [Authorize]
         [HasPermission(Permission.CanCreateMovie)]
