@@ -20,7 +20,7 @@ namespace PortalAboutEverything.Hubs
             var userName = _authService.IsAuthenticated()
                 ? _authService.GetUserName()
                 : "Гость";
-            var movieName = _movieRepositories.Get(movieId).Name;
+            var movieName = _movieRepositories.GetMovieName(movieId);
             Clients.All.NotifyAboutDelitingMovie(userName, movieName);
         }
     }

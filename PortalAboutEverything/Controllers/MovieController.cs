@@ -9,6 +9,7 @@ using PortalAboutEverything.Services;
 using PortalAboutEverything.Services.AuthStuff;
 using System.Reflection;
 using PortalAboutEverything.Services.Apis;
+using PortalAboutEverything.Mappers;
 
 namespace PortalAboutEverything.Controllers
 {
@@ -20,13 +21,16 @@ namespace PortalAboutEverything.Controllers
         private PathHelper _pathHelper;
         private HttpMoviesAverageRateApiService _httpMoviesAverageRateApiService;
         private HttpApiSpellService _httpApiSpellService;
+        private MovieMapper _movieMapper;
 
         public MovieController(MovieRepositories movieRepositories,
             AuthService authService,
             UserRepository userRepository,
             PathHelper pathHelper,
             HttpMoviesAverageRateApiService httpMoviesAverageRateApiService,
-            HttpApiSpellService httpApiSpellService)
+            HttpApiSpellService httpApiSpellService,
+            MovieMapper movieMapper
+            )
         {
             _movieRepositories = movieRepositories;
             _authService = authService;
@@ -34,22 +38,13 @@ namespace PortalAboutEverything.Controllers
             _pathHelper = pathHelper;
             _httpMoviesAverageRateApiService = httpMoviesAverageRateApiService;
             _httpApiSpellService = httpApiSpellService;
+            _movieMapper = movieMapper;
         }
 
         public IActionResult Index()
         {
             var movieStatistics = _movieRepositories.GetMovieStatistic();
-            var moviesViewModel = _movieRepositories.GetAll().Select(movie => new MovieIndexViewModel
-            {
-                Id = movie.Id,
-                Name = movie.Name,
-                Description = movie.Description,
-                ReleaseYear = movie.ReleaseYear,
-                Director = movie.Director,
-                Budget = movie.Budget,
-                CountryOfOrigin = movie.CountryOfOrigin,
-                HasCover = _pathHelper.IsMovieImageExist(movie.Id),
-            }).ToList();
+            var moviesViewModel = _movieRepositories.GetAll().Select(movie => _movieMapper.MapToIndex(movie)).ToList();
 
             var viewModel = new IndexMovieAdminViewModel()
             {
@@ -87,15 +82,7 @@ namespace PortalAboutEverything.Controllers
                 return View(movieCreateViewModel);
             }
 
-            var movie = new Movie
-            {
-                Name = movieCreateViewModel.Name,
-                Description = movieCreateViewModel.Description,
-                ReleaseYear = movieCreateViewModel.ReleaseYear,
-                Director = movieCreateViewModel.Director,
-                Budget = movieCreateViewModel.Budget,
-                CountryOfOrigin = movieCreateViewModel.CountryOfOrigin,
-            };
+            var movie = _movieMapper.MapCreateViewModelToMovie(movieCreateViewModel);
 
             _movieRepositories.Create(movie);
 
@@ -119,16 +106,7 @@ namespace PortalAboutEverything.Controllers
         public IActionResult UpdateMovie(int id)
         {
             var movie = _movieRepositories.Get(id);
-            var viewModel = new MovieUpdateViewModel
-            {
-                Id = movie.Id,
-                Name = movie.Name,
-                Description = movie.Description,
-                ReleaseYear = movie.ReleaseYear,
-                Director = movie.Director,
-                Budget = movie.Budget,
-                CountryOfOrigin = movie.CountryOfOrigin,
-            };
+            var viewModel = _movieMapper.MapToUpdate(movie);
             return View(viewModel);
         }
 
@@ -142,16 +120,7 @@ namespace PortalAboutEverything.Controllers
                 return View(movieUpdateViewModel);
             }
 
-            var movie = new Movie
-            {
-                Id = movieUpdateViewModel.Id,
-                Name = movieUpdateViewModel.Name,
-                Description = movieUpdateViewModel.Description,
-                ReleaseYear = movieUpdateViewModel.ReleaseYear,
-                Director = movieUpdateViewModel.Director,
-                Budget = movieUpdateViewModel.Budget,
-                CountryOfOrigin = movieUpdateViewModel.CountryOfOrigin,
-            };
+            var movie = _movieMapper.MapUpdateViewModelToMovie(movieUpdateViewModel);
 
             _movieRepositories.Update(movie);
 
