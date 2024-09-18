@@ -18,7 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(x =>
 {
@@ -65,8 +64,6 @@ builder.Services.AddHttpClient<HttpChatApiService>(
     x => x.BaseAddress = new Uri("https://localhost:7072/"));
 builder.Services.AddHttpClient<HttpApiKittyService>(
     t => t.BaseAddress = new Uri("https://api.thecatapi.com"));
-builder.Services.AddHttpClient<HttpApiJoke>(
-    t => t.BaseAddress = new Uri("https://official-joke-api.appspot.com/"));
 builder.Services.AddHttpClient<HttpMoviesAverageRateApiService>(
     x => x.BaseAddress = new Uri("https://localhost:58814/"));
 builder.Services.AddHttpClient<HttpApiSpellService>(
@@ -109,8 +106,5 @@ app.MapHub<AlertHub>("/hubs/alert");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.UseSwagger();
-app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 
 app.Run();
