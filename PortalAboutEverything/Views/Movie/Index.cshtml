@@ -17,10 +17,10 @@
 
 <div class="movieStatisticsTable">
     <div class="movieColumnsName">
-        <div class="cell">@Movie_Index.MovieName</div>
-        <div class="cell">@Movie_Index.DirectorName</div>
-        <div class="cell">@Movie_Index.AmountUsers</div>
-        <div class="cell">@Movie_Index.AmountReviews</div>
+        <div class="cellHeader">@Movie_Index.MovieName</div>
+        <div class="cellHeader">@Movie_Index.DirectorName</div>
+        <div class="cellHeader">@Movie_Index.AmountUsers</div>
+        <div class="cellHeader">@Movie_Index.AmountReviews</div>
     </div>
     @foreach (var movieInfo in Model.MovieStatistics)
     {
@@ -33,30 +33,29 @@
         </div>
         }
 </div>
-<div>
-    <h1>Notifications</h1>
+<div class="notifications">
+    <div class="notif">Notifications:</div>
     <div class="notifications-containter">
     </div>
 </div>
-<div>
-    @Movie_Index.ChooseAction
-</div>
-<div>
-    @if (Model.IsMovieAdmin)
-    {
+<div class="actions-container">
+        @if (Model.IsMovieAdmin)
+        {
+            <div class="action">
             <a class="create-link" href="/Movie/CreateMovie">@Movie_Index.CreateMovie</a>
-    }
-</div>
-<div>
-    @if (User.Identity?.IsAuthenticated ?? false)
-    {
+            </div>
+        }
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+        <div class="action">
             <a class="moviesFan-link" href="/Movie/MoviesFan">@Movie_Index.MovieFanPage</a>
-    }
+        </div>
+        }
+    <div class="action">
+        <a class="methods-link" href="/Movie/Methods">All methods</a>
+    </div>
 </div>
-<div>
-    <a class="methods-link" href="/Movie/Methods">All methods</a>
-</div>
-<div>
+<div class="listOfMovies">
     @Movie_Index.ListOfMovies
 </div>
 <div class="movies">
@@ -64,7 +63,7 @@
     {
         <div class="movie">
             <input class="movieId" type="hidden" value="@movie.Id" />
-            <span class="movieName">@Movie_Index.Movie <a href="/Movie/UpdateMovie?id=@movie.Id">@movie.Name</a></span> 
+            <span class="movieName">@Movie_Index.Movie <a href="/Movie/UpdateMovie?id=@movie.Id">@movie.Name</a></span>
             @if (movie.HasCover)
             {
                 <img class="movieImage" src="/images/Movie/cover-@(movie.Id).jpg" />

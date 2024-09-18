@@ -12,7 +12,7 @@
 }
 
 .movieName {
-    background: #eb76e6c9;
+    background: #e6e6dec9;
     border-radius: 5px;
     padding: 5px;
     margin: 8px;
@@ -31,9 +31,9 @@
     border: 3px solid red;
 }
 
-    .movie.active .movieName {
-        background: #ffa007;
-    }
+.movie.active .movieName {
+    background: #ffa007;
+}
 
 .review {
     padding: 5px;
@@ -65,6 +65,7 @@
     margin-bottom: 20px;
     font-size: small;
     width: max-content;
+    border-radius: 0.5rem;
 }
 
 .movieColumnsName {
@@ -81,6 +82,16 @@
     width: 200px;
     height: auto;
     align-content: center;
+}
+
+.cellHeader {
+    padding: 5px;
+    border: 1px solid black;
+    width: 200px;
+    height: auto;
+    align-content: center;
+    font-style: italic;
+    font-weight: 500;
 }
 
 .delete {
@@ -124,4 +135,56 @@
     padding: 10px;
     background: #f6d3fa;
     margin-bottom: 15px;
+}
+
+.listOfMovies {
+    font-weight: 700;
+    font-size: large;
+}
+
+.notifications {
+    border: 3px solid black;
+    border-radius: 0.5rem;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.notif {
+    font-weight: 700;
+    font-size: large;
+}
+
+.actions-container {
+    border: 3px solid black;
+    border-radius: 0.5rem;
+    display: flex;
+    width: 50%;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.action {
+    padding: 20px;
+    border: 3px solid black;
+    width: 50%;
+    height: auto;
+    align-content: center;
+    background-image: url(/images/Movie//background.jpg);
+    background-size: cover;
+}
+
+.create-link {
+    color: #e4e4e4;
+    text-decoration: solid;
+}
+
+.moviesFan-link {
+    color: #e4e4e4;
+    text-decoration: solid;
+}
+
+.methods-link {
+    color: #e4e4e4;
+    text-decoration: solid;
 }
